@@ -13,14 +13,17 @@ class AddressRepository
 
 	public function addresses($request)
 	{
-		$user = $request->user();
+        $user = $request->user();
+
 		return $user->addresses;
 	}
 
 	public function store($data)
 	{
         // $user = $request->user();
+
         $user = Auth::user();
+
 		return $user->addresses()->create($data);
 	}
 

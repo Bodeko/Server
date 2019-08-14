@@ -22,7 +22,9 @@ class CategoriesController extends Controller
     public function index()
     {
         $categories = $this->repository->categories();
+
         return $categories;
+
         // return view('categories.index', compact('categories'));
     }
 
@@ -56,7 +58,9 @@ class CategoriesController extends Controller
     public function show($id)
     {
         $products = $this->repository->productsByCategoryId($id);
+
         return $products;
+
         // return view('categories.show', compact('products'));
     }
 
@@ -69,6 +73,7 @@ class CategoriesController extends Controller
     public function edit($id)
     {
         $categories = $this->repository->find($id);
+
         return view('categories.edit', compact('categories'));
     }
 

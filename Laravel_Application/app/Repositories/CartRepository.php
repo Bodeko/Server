@@ -23,10 +23,13 @@ class CartRepository
 	public function update($id)
 	{
         $productInCart = Auth::user()->cart->products()->find($id);
+
         if( $productInCart === null){
             return Auth::user()->cart->products()->attach($id, ['quantity'=>1]);
         }
+
         $productQuantityInCart = $productInCart->pivot->quantity;
+
         return $this->updateProductQuantity($productQuantityInCart+1, $id);
 	}
 

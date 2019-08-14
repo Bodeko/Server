@@ -25,7 +25,9 @@ class OrderController extends Controller
     public function index()
     {
         $orders = $this->repository->all();
+
         return $orders;
+
         // return view('order.index', compact('orders'));
     }
 
@@ -48,7 +50,9 @@ class OrderController extends Controller
     public function store(Request $request)
     {
         // return $request['address_id'];
+
         return $this->repository->placeOrder($request['address_id']);
+
         // return view('order.success');
     }
 
@@ -63,8 +67,11 @@ class OrderController extends Controller
         $order=$this->repository->find($id);
 
         $address = $this->repository->orderAddress($order);
+
         $products = $this->repository->orderProducts($order);
+
         return ['address'=>$address, 'products' => $products];
+
         // return view('order.show', compact('products', 'address'));
     }
 
@@ -107,14 +114,18 @@ class OrderController extends Controller
     public function finalReport($id, PlaceOrderFinalReportTransformation $transform)
     {
         $address = Address::findOrFail($id);
+
         $user = Auth::user();
+
         $products = $user->cart->products;
 
         return $transform->transform($products, $address);
+
         // return view('order.finalReport', compact('address', 'products'));
     }
 
     public function buyNow(Request $request){
+
         $validatedData = $request->validate([
             'product_id' => 'required',
             'address_id' => 'required',

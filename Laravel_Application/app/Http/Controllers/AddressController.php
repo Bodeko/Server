@@ -14,7 +14,6 @@ class AddressController extends Controller
     public function __construct(AddressRepository $repository)
     {
         $this->repository = $repository;
-
     }
     /**
      * Display a listing of the resource.
@@ -24,7 +23,9 @@ class AddressController extends Controller
     public function index(Request $request)
     {
         $addresses = $this->repository->addresses($request);
+
         return $addresses;
+
         // return view('address.index', compact('addresses'));
     }
 
@@ -48,8 +49,11 @@ class AddressController extends Controller
     {
 
         $data = $request->validated();
+
         $result = $this->repository->store($data);
+
         return $result;
+
         // return redirect('/address');
     }
 
@@ -73,6 +77,7 @@ class AddressController extends Controller
     public function edit($id)
     {
         $address = $this->repository->find($id);
+
         return view('address.edit', compact('address'));
     }
 
@@ -86,7 +91,9 @@ class AddressController extends Controller
     public function update(AddressStoreRequest $request, $id)
     {
         $data = $request->validated();
+
         $this->repository->update($data, $id);
+
         return redirect('/address');
     }
 
@@ -99,6 +106,7 @@ class AddressController extends Controller
     public function destroy($id)
     {
         $this->repository->delete($id);
+
         return redirect('/address');
     }
 }

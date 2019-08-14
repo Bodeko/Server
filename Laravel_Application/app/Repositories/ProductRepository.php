@@ -29,7 +29,9 @@ class ProductRepository
 	public function delete($id)
 	{
         $category =  $this->find($id)->category->id;
+
         $product->delete();
+
         return $category;
 
         // return $this->find($id)->delete();

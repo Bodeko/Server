@@ -29,7 +29,9 @@ class CartController extends Controller
     public function index(Request $request)
     {
         $products = $this->repository->allProducts($request);
+
         return $products;
+
         // return view('cart.index', compact('products'));
     }
 
@@ -88,19 +90,25 @@ class CartController extends Controller
     public function update(Request $request, $product_id)
     {
         $result = $this->repository->update($product_id);
+
         return $result;
+
         // return redirect('/products/'.$product_id);
     }
 
     public function updateProductQuantity(CartUpdateRequest $request, $product_id)
     {
         $quantity = $request->validated();
+
         $this->repository->updateProductQuantity($quantity, $product_id);
+
         return redirect('/carts');
     }
 
 
-    public function removeFromCart(Request $request, $product_id){
+    public function removeFromCart(Request $request, $product_id)
+    {
+
         $result = $this->repository->removeProductFromCart($product_id);
 
     }
@@ -114,6 +122,7 @@ class CartController extends Controller
     public function destroy()
     {
         $this->repository->destroy();
+
         return redirect('/carts');
     }
 

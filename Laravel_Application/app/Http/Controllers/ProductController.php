@@ -25,7 +25,9 @@ class ProductController extends Controller
     public function index()
     {
         $products = $this->repository->products();
+
         return $products;
+
         // return view('product.index', compact('products'));
     }
 
@@ -65,7 +67,9 @@ class ProductController extends Controller
     public function show($id)
     {
         $product = $this->repository->find($id);
+
         return $product;
+
         // return(view('product.show', compact('product')));
     }
 
@@ -80,7 +84,7 @@ class ProductController extends Controller
         $product = $this->repository->find($id);
 
         $currentCategory = $product->category;
-        
+
         $categories = Categories::all();
 
 
@@ -97,7 +101,9 @@ class ProductController extends Controller
     public function update(ProductStoreRequest $request, $id)
     {
         $data = $request->validated();
+
         $this->repository->update($data, $id);
+
         return redirect('/products/'.$id);
     }
 
@@ -110,6 +116,7 @@ class ProductController extends Controller
     public function destroy($id)
     {
         $category_id = $this->repository->delete($id);
+
         return redirect('categories/'.$category_id);
     }
 }
