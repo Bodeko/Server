@@ -10,6 +10,7 @@ import { AddressListComponent } from './address/address-list/address-list.compon
 import { AddressCreateComponent } from './address/address-create/address-create.component';
 import { UserService } from '../services/user.service';
 import { AuthenticateComponent } from './authenticate/authenticate.component';
+import { UserComponent } from './user.component';
 
 @NgModule({
   imports:[
@@ -24,7 +25,8 @@ import { AuthenticateComponent } from './authenticate/authenticate.component';
     AddressComponent,
     AddressListComponent,
     AddressCreateComponent,
-    AuthenticateComponent
+    AuthenticateComponent,
+    UserComponent
   ],
 
   exports: [
