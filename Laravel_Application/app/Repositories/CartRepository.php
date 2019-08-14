@@ -24,7 +24,8 @@ class CartRepository
 	{
         $productInCart = Auth::user()->cart->products()->find($id);
 
-        if( $productInCart === null){
+        if( $productInCart === null)
+        {
             return Auth::user()->cart->products()->attach($id, ['quantity'=>1]);
         }
 
