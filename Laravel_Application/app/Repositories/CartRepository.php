@@ -13,11 +13,9 @@ class CartRepository
 		return auth()->user();
 	}
 
-	public function allProducts($request)
+	public function allProducts()
 	{
-
-
-        return $request->user()->cart->products;
+        return Auth::user()->cart->products;
 	}
 
 	public function update($id)

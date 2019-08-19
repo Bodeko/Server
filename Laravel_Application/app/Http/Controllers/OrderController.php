@@ -6,6 +6,8 @@ use App\Repositories\OrderRepository;
 use Illuminate\Http\Request;
 use App\Order;
 use App\Address;
+use App\Transformations\OrderDetailsByIdTransformation;
+use App\Transformations\OrderTransformation;
 use App\Transformations\PlaceOrderFinalReportTransformation;
 use Illuminate\Support\Facades\Auth;
 
@@ -22,11 +24,11 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(OrderTransformation $transformation)
     {
         $orders = $this->repository->all();
 
-        return $orders;
+        return $transformation->transform($orders);
 
         // return view('order.index', compact('orders'));
     }
@@ -62,7 +64,7 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id, OrderDetailsByIdTransformation $transformation)
     {
         $order=$this->repository->find($id);
 
@@ -70,7 +72,7 @@ class OrderController extends Controller
 
         $products = $this->repository->orderProducts($order);
 
-        return ['address'=>$address, 'products' => $products];
+        return $transformation->transform(['address'=>$address, 'products' => $products]);
 
         // return view('order.show', compact('products', 'address'));
     }

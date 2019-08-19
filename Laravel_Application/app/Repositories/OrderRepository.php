@@ -67,7 +67,7 @@ class OrderRepository
 
         $this->cartEmpty($user);
 
-        return $order->id;
+        return ["message" => 'Order Successfully Placed', 'order_id' => $order->id];
     }
 
     public function buyNow($product_id, $address_id){

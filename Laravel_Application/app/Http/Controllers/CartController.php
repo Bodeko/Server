@@ -8,8 +8,7 @@ use App\User;
 use Illuminate\Support\Facades\Auth;
 use App\Repositories\CartRepository;
 use App\Http\Requests\CartUpdateRequest;
-
-
+use App\Transformations\CartTransformation;
 
 class CartController extends Controller
 {
@@ -26,11 +25,11 @@ class CartController extends Controller
         $this->repository = $repository;
     }
 
-    public function index(Request $request)
+    public function index(CartTransformation $transformation)
     {
-        $products = $this->repository->allProducts($request);
+        $products = $this->repository->allProducts();
 
-        return $products;
+        return $transformation->transform($products);
 
         // return view('cart.index', compact('products'));
     }

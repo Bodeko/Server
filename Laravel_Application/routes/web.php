@@ -31,7 +31,7 @@ Route::resource('categories', 'CategoriesController');
 Route::middleware(['auth'])->group(function () {
 
 	Route::resource('address', 'AddressController');
-	
+
 	Route::get('/carts', 'CartController@index');
 
 	Route::post('/carts/{product_id}', 'CartController@update');

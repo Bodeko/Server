@@ -18,6 +18,7 @@ class PassportController extends Controller
         $validatedData['password'] = bcrypt($validatedData['password']);
 
         $user = User::create($validatedData);
+        $user->cart()->create();
 
         $token = $user->createToken('authToken')->accessToken;
 
