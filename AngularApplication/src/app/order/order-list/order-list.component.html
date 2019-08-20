@@ -15,7 +15,7 @@
 
     <div class="col-md-6">
       <div>
-        <app-order-details *ngIf = "orderSelected" [orderId] = "selectedOrder?.id" [total] = "selectedOrder?.total" [products] = "orderDetail?.products" [address] = "orderDetail?.address"></app-order-details>
+        <app-order-show *ngIf = "orderSelected" [orderId] = "selectedOrder?.id" [total] = "selectedOrder?.total" [products] = "orderDetail?.products" [address] = "orderDetail?.address"></app-order-show>
       </div>
     </div>
   </div>

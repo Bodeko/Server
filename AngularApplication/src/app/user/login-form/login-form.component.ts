@@ -3,7 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 import { ILoggedUser } from '../../models/user';
 import { Router } from '@angular/router';
-import { AuthenticationService } from 'src/app/services/Authentication.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 
 @Component({
@@ -13,7 +13,7 @@ import { AuthenticationService } from 'src/app/services/Authentication.service';
 })
 export class LoginFormComponent implements OnInit {
   loginForm: FormGroup
-  constructor(private userService: UserService, private route: Router, private auth: AuthenticationService) { }
+  constructor(private userService: UserService, private route: Router, private auth: AuthService) { }
 
   ngOnInit() {
     let email = new FormControl()

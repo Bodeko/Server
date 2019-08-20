@@ -22,7 +22,7 @@ export class ApiService {
     }
 
     post<T>(path, data, operation) {
-      console.log(this.token);
+      // console.log(this.token);
         return this.http.post<T>(environment.api_url + path, data, this.option).pipe(catchError(this.handleError<T>(operation)))
     }
 

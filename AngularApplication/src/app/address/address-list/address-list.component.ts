@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { IAddress } from '../address';
+import { IAddress } from 'src/app/models/address';
 
 @Component({
   selector: 'app-address-list',
@@ -7,8 +7,8 @@ import { IAddress } from '../address';
   styleUrls: ['./address-list.component.css']
 })
 export class AddressListComponent implements OnInit {
-  @Input() address: IAddress
-  @Output() sendSelectedAddressToAddress = new EventEmitter
+  @Input() address: IAddress;
+  @Output() sendSelectedAddressToAddress = new EventEmitter;
   constructor() {
   }
 
@@ -17,7 +17,7 @@ export class AddressListComponent implements OnInit {
   }
 
   setAddressToCart(){
-    this.sendSelectedAddressToAddress.emit(this.address)
+    this.sendSelectedAddressToAddress.emit(this.address);
   }
 
 }

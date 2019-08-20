@@ -29,7 +29,7 @@ class AddressStoreRequest extends FormRequest
             'street.required' => 'street is required',
 
             'city.required' => 'city is required',
-            'city.alpha' => 'city must conatain only alphabets',
+            // 'city.alpha' => 'city must conatain only alphabets',
 
             'state.required' => 'state is required',
             'state.alpha' => 'state must conatain only alphabets',
@@ -55,7 +55,7 @@ class AddressStoreRequest extends FormRequest
     {
         return [
             'street' => 'required',
-            'city' => 'required|alpha',
+            'city' => 'required',
             'state' => 'required|alpha',
             'pincode' => 'required|numeric|digits:6',
             'phone_number' => 'required|numeric|digits:10',

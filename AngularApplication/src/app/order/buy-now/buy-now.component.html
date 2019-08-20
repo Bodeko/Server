@@ -33,7 +33,7 @@
           <div class="card-body">{{product?.cost}}</div>
           <button class="btn btn-info" (click) = "changeHidden()">Select Address</button>
         </div>
-        <app-address *ngIf="hidden" (setSelectedAddressInCart) = setSelectedAddress($event)></app-address>
+        <app-address-home *ngIf="hidden" (setSelectedAddressInCart) = setSelectedAddress($event)></app-address-home>
       </div>
     </div>
   </div>

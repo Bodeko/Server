@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { OrderService } from '../../services/order.service';
-import { IAddress } from 'src/app/user/address/address';
+import { IAddress } from 'src/app/models/address';
 import { IProduct } from 'src/app/models/product';
 
 @Component({
@@ -10,37 +10,37 @@ import { IProduct } from 'src/app/models/product';
   styleUrls: ['./buy-now.component.css']
 })
 export class BuyNowComponent implements OnInit {
-  hidden: boolean = false
-  selectedAddress: IAddress
-  addressSelected: boolean = false
-  product: IProduct
-  orderplaced: boolean = false
-  orderId: number
+  hidden: boolean = false;
+  selectedAddress: IAddress;
+  addressSelected: boolean = false;
+  product: IProduct;
+  orderplaced: boolean = false;
+  orderId: any;
 
 
   constructor(private orderService: OrderService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.orderService.getProductById(this.route.snapshot.params['id']).subscribe(data => {
-      this.product = data
+      this.product = data;
     })
   }
 
   changeHidden(){
-    this.hidden = !this.hidden
+    this.hidden = !this.hidden;
   }
 
-  setSelectedAddress(address){
+  setSelectedAddress(address) {
     // console.log("at cart",address)
-    this.selectedAddress = address
-    this.addressSelected = true
+    this.selectedAddress = address;
+    this.addressSelected = true;
   }
 
 
   BuyNow(){
     this.orderService.buyNow({'product_id': this.product.id, 'address_id': this.selectedAddress.id}).subscribe(data => {
-      this.orderId = data
-      this.orderplaced = true
+      this.orderId = data;
+      this.orderplaced = true;
     })
   }
 

@@ -5,15 +5,11 @@ import { RegistrationFormComponent } from './registration-form/registration-form
 import { RouterModule } from '@angular/router';
 import { userRoute } from './user.route';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { AddressComponent } from './address/address.component';
-import { AddressListComponent } from './address/address-list/address-list.component';
-import { AddressCreateComponent } from './address/address-create/address-create.component';
 import { UserService } from '../services/user.service';
 import { AuthenticateComponent } from './authenticate/authenticate.component';
-import { UserComponent } from './user.component';
 
 @NgModule({
-  imports:[
+  imports: [
     CommonModule,
     RouterModule.forChild(userRoute),
     ReactiveFormsModule,
@@ -22,17 +18,10 @@ import { UserComponent } from './user.component';
   declarations: [
     LoginFormComponent,
     RegistrationFormComponent,
-    AddressComponent,
-    AddressListComponent,
-    AddressCreateComponent,
     AuthenticateComponent,
-    UserComponent
   ],
 
   exports: [
-    AddressComponent,
-    AddressCreateComponent,
-    AddressListComponent
   ],
 
   providers: [

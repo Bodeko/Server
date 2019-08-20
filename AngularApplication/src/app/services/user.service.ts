@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ILoggedUser } from '../models/user';
-import { IAddress } from '../user/address/address';
+import { IAddress } from '../models/address';
 import { ApiService } from './api.service';
 
 @Injectable()

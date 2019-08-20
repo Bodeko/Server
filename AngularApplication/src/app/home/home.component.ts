@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit {
   }
 
   setCategoryId(id) {
-    console.log(id);
+    // console.log(id);
     this.categoryId = id;
 
   }

@@ -27,7 +27,7 @@ export class OrderService{
   }
 
   buyNow(data){
-    return this.api.post<number>('/orders/buynow', data, 'buyNow');
+    return this.api.post<number>('/orders/buy-now', data, 'buyNow');
   }
 
 }

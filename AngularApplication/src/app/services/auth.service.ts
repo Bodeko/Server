@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
 import { Router } from '@angular/router';
-import { ILoggedUser } from '../models/user';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
+export class AuthService {
 
-export class AuthenticationService{
-  constructor(private api: ApiService, private route: Router) {
-
-  }
+  constructor(private api: ApiService, private route: Router) {}
 
   login(formData){
     this.api.post<any>('/login', formData, 'login').subscribe(data => {

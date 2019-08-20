@@ -1,8 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { ApiService } from '../services/api.service';
-import { IUser } from '../models/user';
 import { Router } from '@angular/router';
-import { AuthenticationService } from '../services/Authentication.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
     selector: "header",
@@ -11,7 +10,7 @@ import { AuthenticationService } from '../services/Authentication.service';
 
 export class HeaderComponent implements OnInit{
   loggedIn: boolean = false
-  constructor(private api: ApiService, private route: Router, private auth:AuthenticationService) {
+  constructor(private api: ApiService, private route: Router, private auth:AuthService) {
     if(localStorage.getItem('accessToken') !== null) {
       this.loggedIn = true;
     }

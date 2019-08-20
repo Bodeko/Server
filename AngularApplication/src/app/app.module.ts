@@ -10,10 +10,10 @@ import { HomeComponent } from './home/home.component';
 import { CategoriesModule } from './categories/categories.module';
 import { ProductModule } from './product/product.module';
 import { OrderModule } from './order/order.module';
-import { AuthenticationService } from './services/Authentication.service';
 import { appRoute } from 'src/routes';
 import { AuthGuard } from './auth.guard';
 import { ErrorComponent } from './error/error/error.component';
+import { AddressModule } from './address/address.module';
 
 @NgModule({
   declarations: [
@@ -30,11 +30,11 @@ import { ErrorComponent } from './error/error/error.component';
     CategoriesModule,
     ProductModule,
     OrderModule,
-    CategoriesModule
+    CategoriesModule,
+    AddressModule
   ],
   providers: [
     ApiService,
-    AuthenticationService,
     AuthGuard
   ],
   bootstrap: [AppComponent]
