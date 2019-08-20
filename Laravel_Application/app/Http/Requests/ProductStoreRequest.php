@@ -21,9 +21,14 @@ class ProductStoreRequest extends FormRequest
     {
         return [
             'title.required' => 'Title is required',
+
             'description.required' => 'Description is required',
+
             'cost.required' => 'Cost is required',
+            'cost.numeric' => 'Cost should be neumeric',
+
             'category_id.required' => 'Please select a category',
+            'category_id.numeric' => 'category Id sgould be numeric',
             'category_id.exists' => 'Please select a valid category',
         ];
     }
@@ -38,8 +43,8 @@ class ProductStoreRequest extends FormRequest
         return [
             'title' => 'required',
             'description' => 'required',
-            'cost' => 'required',
-            'category_id' => 'required|exists:categories,id',
+            'cost' => 'required|numeric',
+            'category_id' => 'required|numeric|exists:categories,id',
         ];
     }
 }

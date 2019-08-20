@@ -3,68 +3,55 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\OrderRepository;
-use Illuminate\Http\Request;
-use App\Order;
-use App\Address;
-use App\Transformations\OrderDetailsByIdTransformation;
-use App\Transformations\OrderTransformation;
-use App\Transformations\PlaceOrderFinalReportTransformation;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\BuyNowRequest;
+use App\Http\Requests\OrderStoreRequest;
+use App\Transformers\OrderTransformer;
 
 class OrderController extends Controller
 {
     private $repository;
+    private $transformer;
 
-    public function __construct(OrderRepository $repository){
+    public function __construct(OrderRepository $repository, OrderTransformer $transformer){
 
         $this->repository = $repository;
+        $this->transformer = $transformer;
+
     }
     /**
-     * Display a listing of the resource.
+     * Display a listing of the orders.
      *
-     * @return \Illuminate\Http\Response
+     * @return array of orders
      */
-    public function index(OrderTransformation $transformation)
+    public function index()
     {
         $orders = $this->repository->all();
 
-        return $transformation->transform($orders);
-
-        // return view('order.index', compact('orders'));
+        return $this->transformer->transformOrderList($orders);
     }
 
+
     /**
-     * Show the form for creating a new resource.
+     * Store a newly created order in storage.
      *
-     * @return \Illuminate\Http\Response
+     * @param  App\Http\Requests\OrderStoreRequest  $request
+     * @return object of success message and order_id
      */
-    public function create()
+    public function store(OrderStoreRequest $request)
     {
-        //
+
+        $data = $request->all();
+
+        return $this->repository->placeOrder($data['address_id']);
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        // return $request['address_id'];
-
-        return $this->repository->placeOrder($request['address_id']);
-
-        // return view('order.success');
-    }
-
-    /**
-     * Display the specified resource.
+     * Display the specified order.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return object of address and products
      */
-    public function show($id, OrderDetailsByIdTransformation $transformation)
+    public function show($id)
     {
         $order=$this->repository->find($id);
 
@@ -72,67 +59,19 @@ class OrderController extends Controller
 
         $products = $this->repository->orderProducts($order);
 
-        return $transformation->transform(['address'=>$address, 'products' => $products]);
-
-        // return view('order.show', compact('products', 'address'));
+        return $this->transformer->transformOrderDetailsById($address, $products);
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Buy Now a single product.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param App\Http\Requests\BuyNowRequest $request
+     * @return product_id
      */
-    public function edit($id)
-    {
-        //
-    }
+    public function buyNow(BuyNowRequest $request){
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+        $data = $request->all();
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
-
-
-    //this should be in cart..
-    public function finalReport($id, PlaceOrderFinalReportTransformation $transform)
-    {
-        $address = Address::findOrFail($id);
-
-        $user = Auth::user();
-
-        $products = $user->cart->products;
-
-        return $transform->transform($products, $address);
-
-        // return view('order.finalReport', compact('address', 'products'));
-    }
-
-    public function buyNow(Request $request){
-
-        $validatedData = $request->validate([
-            'product_id' => 'required',
-            'address_id' => 'required',
-        ]);
-
-        return $this->repository->buyNow($validatedData['product_id'], $validatedData['address_id']);
+        return $this->repository->buyNow($data['product_id'], $data['address_id']);
     }
 }

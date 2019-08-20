@@ -11,86 +11,54 @@ use App\Repositories\AddressRepository;
 class AddressController extends Controller
 {
     private $repository;
+
     public function __construct(AddressRepository $repository)
     {
         $this->repository = $repository;
     }
+
     /**
-     * Display a listing of the resource.
+     * Display a listing of all address of authenticated user
      *
-     * @return \Illuminate\Http\Response
+     * @return array of address
      */
-    public function index(Request $request)
+    public function index()
     {
-        $addresses = $this->repository->addresses($request);
+        $addresses = $this->repository->addresses();
 
         return $addresses;
 
-        // return view('address.index', compact('addresses'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('address.create');
-    }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created Address in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param  App\Http\Requests\AddressStoreRequest  $request
+     * @return address object
      */
     public function store(AddressStoreRequest $request)
     {
 
-        $data = $request->validated();
+        $data = $request->all();
 
         $result = $this->repository->store($data);
 
         return $result;
 
-        // return redirect('/address');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        $address = $this->repository->find($id);
-
-        return view('address.edit', compact('address'));
-    }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  App\Http\Requests\AddressStoreRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(AddressStoreRequest $request, $id)
     {
-        $data = $request->validated();
+        $data = $request->all();
 
         $this->repository->update($data, $id);
 
@@ -107,6 +75,6 @@ class AddressController extends Controller
     {
         $this->repository->delete($id);
 
-        return redirect('/address');
+        return ['message' => 'address removed successfully'];
     }
 }

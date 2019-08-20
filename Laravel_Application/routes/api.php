@@ -25,26 +25,22 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     Route::post('/login', 'PassportController@login');
 
 
-// Route::middleware([])
-
-// Auth::routes();
-
-
 Route::middleware(['auth:api'])->group(function(){
+
     Route::post('/logout', 'PassportController@logout');
 	Route::get('/carts', 'CartController@index');
     Route::resource('address', 'AddressController');
 
     // cart routes
 	Route::delete('/carts/{product_id}', 'CartController@removeFromCart');
-    Route::post('/carts/{product_id}', 'CartController@update');
+    Route::post('/carts/{product_id}', 'CartController@addToCart');
 
 
     // Order routes
-    Route::post('/orders', 'OrderController@store');
-	Route::get('/orders/{id}', 'OrderController@show');
-	Route::get('/orders', 'OrderController@index');
-	Route::post('/orders/buynow', 'OrderController@buyNow');
 
+
+    Route::resource('orders', 'orderController');
+
+	Route::post('/orders/buy-now', 'OrderController@buyNow');
 
 });

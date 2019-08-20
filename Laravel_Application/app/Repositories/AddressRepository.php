@@ -11,9 +11,9 @@ class AddressRepository
 		return Address::findOrFail($id);
 	}
 
-	public function addresses($request)
+	public function addresses()
 	{
-        $user = $request->user();
+        $user = Auth::user();
 
 		return $user->addresses;
 	}

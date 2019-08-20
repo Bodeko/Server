@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CartUpdateRequest extends FormRequest
+class OrderStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -16,25 +16,31 @@ class CartUpdateRequest extends FormRequest
         return true;
     }
 
+    /**
+     * Get the messages for failed validations
+     *
+     * @return array
+     */
+
 
     public function message()
     {
         return [
-            'quantity.required' => 'please enter quantity.',
-            'quantity.min' => 'quantity should be greater or equal than 1.'
+            'address_id.required' => 'please pass addressId',
+            'address_id.numeric' => 'Address_id must be numeric',
         ];
     }
+
 
     /**
      * Get the validation rules that apply to the request.
      *
      * @return array
      */
-
     public function rules()
     {
         return [
-            'quantity' => 'required|min:1'
+            'address_id' => 'required|numeric'
         ];
     }
 }

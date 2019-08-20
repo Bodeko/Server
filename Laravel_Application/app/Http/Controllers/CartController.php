@@ -3,126 +3,93 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Cart;
-use App\User;
-use Illuminate\Support\Facades\Auth;
 use App\Repositories\CartRepository;
 use App\Http\Requests\CartUpdateRequest;
-use App\Transformations\CartTransformation;
+use App\Transformers\CartTransformer;
 
 class CartController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
 
     private $repository;
+    private $transformer;
 
-    public function __construct(CartRepository $repository)
+    public function __construct(CartRepository $repository, CartTransformer $transformer)
     {
         $this->repository = $repository;
+        $this->transformer = $transformer;
     }
 
-    public function index(CartTransformation $transformation)
+    /**
+     * Display a list of products in cart.
+     *
+     * @return array of products
+     */
+    public function index()
     {
         $products = $this->repository->allProducts();
 
-        return $transformation->transform($products);
+        return $this->transformer->transform($products);
 
-        // return view('cart.index', compact('products'));
     }
 
 
-
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
+     * Add prouct to cart.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param  int  $product_id
+     * @return success message
      */
-    public function store(Request $request)
+    public function addToCart(Request $request, $product_id)
     {
-        //
+        $this->repository->addToCart($product_id);
+
+        return ['message' => 'product added successfully.'];
+
     }
 
     /**
-     * Display the specified resource.
+     * Update product quantity in cart.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param App\Http\Requests\CartUpdateRequest $request
+     * @param int $product_id
+     * @return success message
      */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $product_id)
-    {
-        $result = $this->repository->update($product_id);
-
-        return $result;
-
-        // return redirect('/products/'.$product_id);
-    }
-
     public function updateProductQuantity(CartUpdateRequest $request, $product_id)
     {
-        $quantity = $request->validated();
+        $quantity = $request->all();
 
         $this->repository->updateProductQuantity($quantity, $product_id);
 
         return redirect('/carts');
     }
 
-
-    public function removeFromCart(Request $request, $product_id)
+    /**
+     * remove prouct to cart.
+     *
+     * @param  int  $product_id
+     * @return success message
+     */
+    public function removeFromCart($product_id)
     {
 
-        $result = $this->repository->removeProductFromCart($product_id);
+        $this->repository->removeProductFromCart($product_id);
+
+        return ['message' => 'product successfully removed'];
 
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove all products from the cart.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return success message
      */
     public function destroy()
     {
         $this->repository->destroy();
 
-        return redirect('/carts');
+        return ['message' => 'all product successfully removed'];
+
     }
 
 

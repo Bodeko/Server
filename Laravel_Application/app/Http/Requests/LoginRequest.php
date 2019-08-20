@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CartUpdateRequest extends FormRequest
+class LoginRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,15 +13,20 @@ class CartUpdateRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return false;
     }
 
-
+    /**
+     * Get the validation message that apply to the request.
+     *
+     * @return array
+     */
     public function message()
     {
         return [
-            'quantity.required' => 'please enter quantity.',
-            'quantity.min' => 'quantity should be greater or equal than 1.'
+            'email.required' => 'please enter email address',
+            'email.email' => 'please enter valid email address',
+            'password.required' => 'please enter password',
         ];
     }
 
@@ -30,11 +35,11 @@ class CartUpdateRequest extends FormRequest
      *
      * @return array
      */
-
     public function rules()
     {
         return [
-            'quantity' => 'required|min:1'
+            'email' => 'email|required',
+            'password' => 'required'
         ];
     }
 }

@@ -1,23 +1,29 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Http\Requests\LoginRequest;
+use App\Http\Requests\RegisterRequest;
 use App\User;
 
 use Illuminate\Http\Request;
 
 class PassportController extends Controller
 {
-    public function register(Request $request)
+
+    /**
+     * Register a new user
+     *
+     * @param App\Http\Requests\RegisterRequest $request
+     * @return response user details and access_token
+     */
+    public function register(RegisterRequest $request)
     {
-        $validatedData = $request->validate([
-            'name' => 'required',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|confirmed'
-        ]);
+        $data = $request->all();
 
-        $validatedData['password'] = bcrypt($validatedData['password']);
+        $data['password'] = bcrypt($data['password']);
 
-        $user = User::create($validatedData);
+        $user = User::create($data);
         $user->cart()->create();
 
         $token = $user->createToken('authToken')->accessToken;
@@ -25,13 +31,15 @@ class PassportController extends Controller
         return response(['user' => $user, 'access_token'=> $token]);
     }
 
-
-    public function login(Request $request)
+    /**
+     * log in.
+     *
+     * @param App\Http\Requests\LoginRequest $request
+     * @return response user details and access_token
+     */
+    public function login(LoginRequest $request)
     {
-        $loginData = $request->validate([
-            'email' => 'email|required',
-            'password' => 'required'
-        ]);
+        $loginData = $request->all();
 
         if(!auth()->attempt($loginData))
         {
@@ -43,10 +51,19 @@ class PassportController extends Controller
         return response(['user' => auth()->user(), 'access_token'=> $token]);
     }
 
+
+    /**
+     * logout current user
+     *
+     * @param Illuminate\Http\Request $requst
+     * @return object of success message
+     */
     public function logout(Request $request){
 
         $userTokens = $request->user()->token();
 
         $userTokens->revoke();
+
+        return ['message' => 'user successfully logged out.'];
     }
 }

@@ -18,7 +18,7 @@ class CartRepository
         return Auth::user()->cart->products;
 	}
 
-	public function update($id)
+	public function addToCart($id)
 	{
         $productInCart = Auth::user()->cart->products()->find($id);
 
