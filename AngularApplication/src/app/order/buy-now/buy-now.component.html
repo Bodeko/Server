@@ -12,8 +12,8 @@
             </div>
           </div>
         </div> <br>
-        <em *ngIf = "!addressSelected" style="float: right">Please select a address</em>
-        <div class="card border-info" *ngIf = "addressSelected">
+        <em *ngIf = "!isAddressSelected" style="float: right">Please select a address</em>
+        <div class="card border-info" *ngIf = "isAddressSelected">
           <div class="card-header bg-info">Selected Address</div>
           <div class="card-body">
             <span>Street: </span><span>{{selectedAddress.street}}</span><br>
@@ -31,9 +31,9 @@
         <div class="card">
           <div class="card-header bg-warning">Total Amount</div>
           <div class="card-body">{{product?.cost}}</div>
-          <button class="btn btn-info" (click) = "changeHidden()">Select Address</button>
+          <button class="btn btn-info" (click) = "toggleAdressPanel()">Select Address</button>
         </div>
-        <app-address-home *ngIf="hidden" (setSelectedAddressInCart) = setSelectedAddress($event)></app-address-home>
+        <app-address-home *ngIf="isAddressPanelHidden" (setAddress) = setSelectedAddress($event)></app-address-home>
       </div>
     </div>
   </div>

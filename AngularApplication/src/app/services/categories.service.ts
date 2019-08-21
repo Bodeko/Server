@@ -7,7 +7,7 @@ import { ICategories } from '../models/categories';
 export class CategoriesService{
     constructor(private api: ApiService){ }
 
-    getCategories(): Observable<ICategories[]>{
+    getAll(): Observable<ICategories[]>{
         return this.api.get<ICategories[]>('/categories', 'getCategories')
     }
 

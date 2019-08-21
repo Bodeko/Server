@@ -3,11 +3,12 @@ import { ActivatedRoute } from '@angular/router';
 import { OrderService } from 'src/app/services/order.service';
 
 @Component({
-  selector: 'app-order-place',
-  templateUrl: './order-place.component.html',
-  styleUrls: ['./order-place.component.css']
+  selector: 'app-order-create',
+  templateUrl: './order-create.component.html',
+  styleUrls: ['./order-create.component.css']
 })
-export class OrderPlaceComponent implements OnInit {
+export class OrderCreateComponent implements OnInit {
+
   addressId: number;
   orderId: any;
   constructor(private route: ActivatedRoute, private orderService: OrderService) { }
@@ -19,5 +20,4 @@ export class OrderPlaceComponent implements OnInit {
     });
 
   }
-
 }

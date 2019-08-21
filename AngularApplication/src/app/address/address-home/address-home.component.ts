@@ -11,7 +11,7 @@ export class AddressHomeComponent implements OnInit {
 
   addressMode: string = 'create';
   address: IAddress[];
-  @Output() setSelectedAddressInCart =  new EventEmitter();
+  @Output() setAddress =  new EventEmitter();
 
 
   constructor(private userService:UserService) { }
@@ -25,18 +25,17 @@ export class AddressHomeComponent implements OnInit {
       }
     });
   }
+
   createAddress(data){
-    // console.log(data)
+
     this.userService.createAddress(data).subscribe(data => {
-      // console.log(data)
       this.addressMode = 'select';
       this.ngOnInit();
     });
-
   }
 
-  setSelectedAddress(address){
-    // console.log(id)
-    this.setSelectedAddressInCart.emit(address);
+  SelectedAddress(address){
+
+    this.setAddress.emit(address);
   }
 }

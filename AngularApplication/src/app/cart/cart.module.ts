@@ -5,13 +5,14 @@ import { cartRoute } from './cart.routes';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ProductModule } from '../product/product.module';
 import { CartService } from '../services/cart.service';
-import { UserService } from '../services/user.service';
 import { CartShowComponent } from './cart-show/cart-show.component';
 import { AddressModule } from '../address/address.module';
+import { CartProductListComponent } from './cart-product-list/cart-product-list.component';
 
 @NgModule({
   declarations: [
-    CartShowComponent
+    CartShowComponent,
+    CartProductListComponent
   ],
   imports: [
     CommonModule,
@@ -23,7 +24,6 @@ import { AddressModule } from '../address/address.module';
   ],
   providers: [
     CartService,
-    UserService
   ]
 })
 export class CartModule { }

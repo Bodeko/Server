@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 import { UserService } from '../../services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registration-form',
@@ -8,29 +9,27 @@ import { UserService } from '../../services/user.service';
   styleUrls: ['./registration-form.component.css']
 })
 export class RegistrationFormComponent implements OnInit {
-  signupForm: FormGroup
+  signupForm: FormGroup;
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private fb: FormBuilder, private route: Router) { }
 
   ngOnInit() {
-    let name = new FormControl()
-    let email = new FormControl()
-    let password = new FormControl()
-    let password_confirmation = new FormControl()
 
-
-    this.signupForm = new FormGroup({
-      name: name,
-      email: email,
-      password: password,
-      password_confirmation: password_confirmation
+    this.signupForm = this.fb.group({
+      name: [],
+      email: [],
+      password: [],
+      password_confirmation: []
     })
   }
 
   SignUp(formValues){
     this.userService.register(formValues).subscribe(data =>{
       localStorage.setItem('accessToken', data.access_token);
-    })
+      this.route.navigate(['/home']).then(() => {
+        window.location.reload();
+      });
+    });
   }
 
 }

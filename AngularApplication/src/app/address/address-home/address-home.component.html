@@ -5,7 +5,7 @@
 	<div class="card-body">
 		<div *ngIf = "addressMode === 'select'">
 			<div *ngFor="let address of address">
-				<app-address-list [address] = "address" (sendSelectedAddressToAddress) = "setSelectedAddress($event)"></app-address-list>
+				<app-address-list [address] = "address" (getSelectedAddress) = "SelectedAddress($event)"></app-address-list>
 			</div>
 		</div>
 		<app-address-create *ngIf = "addressMode === 'create'" (createAddressValues) = "createAddress($event)"></app-address-create>

@@ -8,7 +8,7 @@ import { BuyNowComponent } from './buy-now/buy-now.component';
 import { AddressModule } from '../address/address.module';
 import { OrderListComponent } from './order-list/order-list.component';
 import { OrderShowComponent } from './order-show/order-show.component';
-import { OrderPlaceComponent } from './order-place/order-place.component';
+import { OrderCreateComponent } from './order-create/order-create.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +16,7 @@ import { OrderPlaceComponent } from './order-place/order-place.component';
     BuyNowComponent,
     OrderListComponent,
     OrderShowComponent,
-    OrderPlaceComponent,
+    OrderCreateComponent,
   ],
   imports: [
     CommonModule,
@@ -27,8 +27,7 @@ import { OrderPlaceComponent } from './order-place/order-place.component';
   exports: [
     BuyNowComponent,
     OrderListComponent,
-    OrderPlaceComponent
-
+    OrderCreateComponent
   ],
   providers: [
     OrderService

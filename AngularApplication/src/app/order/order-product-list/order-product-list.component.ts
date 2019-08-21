@@ -7,7 +7,7 @@ import { ICartProduct } from 'src/app/models/cart';
   styleUrls: ['./order-product-list.component.css']
 })
 export class OrderProductListComponent implements OnInit {
-  @Input() product: ICartProduct
+  @Input() product: ICartProduct;
   constructor() { }
 
   ngOnInit() {

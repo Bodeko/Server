@@ -9,27 +9,25 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./product-show.component.css']
 })
 export class ProductShowComponent implements OnInit {
-  product: IProduct
-  id: number
-  addedToCart: boolean = false
+  product: IProduct;
+  id: number;
+  addedToCart: boolean = false;
 
-    constructor(private productService: ProductService, private route: ActivatedRoute){
-      this.id = this.route.snapshot.params['id']
+    constructor(private productService: ProductService, private route: ActivatedRoute) {
+      this.id = this.route.snapshot.params['id'];
     }
 
-    ngOnInit(){
-        this.productService.getProductById(this.id).subscribe(data => {
-            this.product = data
-            console.log(this.product)
-        })
+    ngOnInit() {
+        this.productService.getById(this.id).subscribe(data => {
+            this.product = data;
+        });
     }
 
-    addToCart(){
-      console.log("clicked! " + this.id)
-      this.productService.addProductToCart(this.id).subscribe(data => {
-        // console.log(data)
+    addToCart() {
+      console.log('clicked! ' + this.id);
+      this.productService.addToCart(this.id).subscribe(data => {
         this.addedToCart = true;
-      })
+      });
     }
 
 }

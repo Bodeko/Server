@@ -12,23 +12,22 @@ export class OrderListComponent implements OnInit {
   orders: IOrder[];
   orderDetail: IOrderDetails;
   selectedOrder: IOrder;
-  orderSelected: boolean = false;
+  isOrderSelected: boolean = false;
 
   constructor(private orderService: OrderService) { }
 
   ngOnInit() {
-    this.orderService.getAllOrders().subscribe(data => {
+
+    this.orderService.getAll().subscribe(data => {
       this.orders = data;
-      console.log(this.orders);
     });
   }
 
   getorderDetailsById(order){
-    this.orderSelected = true;
+    this.isOrderSelected = true;
     this.selectedOrder = order;
-    this.orderService.getOrderDetailsById(order.id).subscribe(data => {
+    this.orderService.getDetailsById(order.id).subscribe(data => {
       this.orderDetail = data;
-      // console.log(this.orderDetail)
     });
   }
 

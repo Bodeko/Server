@@ -13,13 +13,11 @@ export class HomeComponent implements OnInit {
 
 
   ngOnInit() {
-    // this.categoryId = this.route.snapshot.params['id']
   }
 
   setCategoryId(id) {
-    // console.log(id);
-    this.categoryId = id;
 
+    this.categoryId = id;
   }
 
 }

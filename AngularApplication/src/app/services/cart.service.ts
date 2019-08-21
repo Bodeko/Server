@@ -4,21 +4,19 @@ import { ApiService } from './api.service';
 
 @Injectable()
 
-export class CartService{
-    constructor(private api: ApiService){
+export class CartService {
+    constructor(private api: ApiService) {
 
     }
 
-    getCartProducts(){
+    getProducts() {
+
         return this.api.get<ICartProduct[]>('/carts', 'getCartProducts');
     }
 
-    removeProductFromCartById(id){
-      return this.api.delete<ICartProduct>('/carts/'+id, 'removeProductFromCartById');
+    removeProduct(id) {
+
+      return this.api.delete<ICartProduct>('/carts/' + id, 'removeProductFromCartById');
     }
-
-
-
-
 
 }

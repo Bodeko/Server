@@ -2,9 +2,7 @@ import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
 import { Router } from '@angular/router';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class AuthService {
 
   constructor(private api: ApiService, private route: Router) {}
@@ -17,7 +15,7 @@ export class AuthService {
           window.location.reload();
         });
       }
-      else{
+      else {
         window.alert(data.message);
       }
     });

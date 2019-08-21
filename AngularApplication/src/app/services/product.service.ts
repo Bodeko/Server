@@ -11,20 +11,20 @@ export class ProductService {
 
 
 
-    getProducts(): Observable<IProduct[]> {
-      return this.api.get<IProduct[]>('/products', 'getProducts');
+    getAll(): Observable<IProduct[]> {
+      return this.api.get<IProduct[]>('/products', 'getAll');
     }
 
-    getProductById(id): Observable<IProduct> {
-      return this.api.get<IProduct>('/products/' + id, 'getProductById');
+    getById(id): Observable<IProduct> {
+      return this.api.get<IProduct>('/products/' + id, 'getById');
     }
 
-    getProductsByCategoryId(id): Observable<IProduct[]> {
-      return this.api.get<IProduct[]>('/categories/' + id, 'getProductByCategoryId');
+    getByCategory(id): Observable<IProduct[]> {
+      return this.api.get<IProduct[]>('/categories/' + id, 'getByCategory');
     }
 
-    addProductToCart(id) {
-      return this.api.post('/carts/' + id, {}, 'addProductToCart');
+    addToCart(product_id) {
+      return this.api.post('/carts/' + product_id, {}, 'addToCart');
     }
 
 

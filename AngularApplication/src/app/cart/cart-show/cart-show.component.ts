@@ -14,41 +14,44 @@ export class CartShowComponent implements OnInit {
   products: ICartProduct[];
   total: number = 0;
   addressMode: string = 'select';
-  hidden: boolean = false;
+  isAddressPanelHidden: boolean = true;
   selectedAddress: IAddress;
-  addressSelected: boolean = false;
-  cartEmpty: boolean = true;
+  isAddressSelected: boolean = false;
+  isCartEmpty: boolean = true;
 
 
 
   constructor(private cartService: CartService, private route: Router) { }
 
   ngOnInit() {
-    this.cartService.getCartProducts().subscribe(data => {
+
+    this.cartService.getProducts().subscribe(data => {
       this.products = data;
-      data.forEach(p => {
-        this.total += p.cost * p.pivot.quantity;
+      data.forEach(product => {
+        this.total += product.cost * product.pivot.quantity;
       });
       if (data.length > 0) {
-        this.cartEmpty = false;
+        this.isCartEmpty = false;
       }
     });
   }
-  changeHidden() {
-    this.hidden = !this.hidden;
+  toggleAddressPanel() {
+
+    this.isAddressPanelHidden = !this.isAddressPanelHidden;
   }
 
-  RemoveCartProduct(id) {
-    this.cartService.removeProductFromCartById(id).subscribe(() => {
+  remove(product_id) {
+
+    this.cartService.removeProduct(product_id).subscribe(() => {
       this.total = 0;
       this.ngOnInit();
     });
   }
 
-  setSelectedAddress(address) {
-    // console.log("at cart",address)
+  setAddress(address) {
+
     this.selectedAddress = address;
-    this.addressSelected = true;
+    this.isAddressSelected = true;
   }
 
   placeOrder() {

@@ -15,7 +15,7 @@
             <p>{{product?.description}}</p>
             <button type="button" class="btn btn-info" (click) = "addToCart()" *ngIf = "addedToCart === false">Add To Cart</button> &nbsp;
             <button type="button" class="btn btn-info" [routerLink] = "['/cart']" *ngIf = "addedToCart === true">Go To Cart</button> &nbsp;
-            <button type="button" class="btn btn-warning" [routerLink] = "['/buy-now/', product?.id]">Buy Now</button>
+            <button type="button" class="btn btn-warning" [routerLink] = "['/buy/', product?.id]">Buy Now</button>
         </div>
     </div>
 </div>

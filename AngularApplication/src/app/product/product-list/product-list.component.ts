@@ -7,24 +7,24 @@ import { ProductService } from '../../services/product.service';
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.css']
 })
-export class ProductListComponent implements OnInit, OnChanges{
-  @Input() categoryId: any
-  products: IProduct[]
-  constructor(private productService: ProductService){}
+export class ProductListComponent implements OnInit, OnChanges {
+  @Input() categoryId: any;
+  products: IProduct[];
+  constructor(private productService: ProductService) {}
 
-  ngOnInit(){
-    if(this.categoryId === 'all'){
-      this.productService.getProducts().subscribe(data => {
-          this.products = data
-      })
+  ngOnInit() {
+    if (this.categoryId === 'all') {
+      this.productService.getAll().subscribe(data => {
+          this.products = data;
+      });
     } else {
-      this.productService.getProductsByCategoryId(this.categoryId).subscribe(data => {
-        this.products = data
-      })
+      this.productService.getByCategory(this.categoryId).subscribe(data => {
+        this.products = data;
+      });
     }
   }
 
-  ngOnChanges(){
-    this.ngOnInit()
+  ngOnChanges() {
+    this.ngOnInit();
   }
 }

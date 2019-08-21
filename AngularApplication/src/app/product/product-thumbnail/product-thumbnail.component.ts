@@ -8,8 +8,8 @@ import { ProductService } from '../../services/product.service';
   styleUrls: ['./product-thumbnail.component.css']
 })
 export class ProductThumbnailComponent implements OnInit {
-  @Input() product: IProduct
-  addedToCart: boolean = false
+  @Input() product: IProduct;
+  addedToCart: boolean = false;
 
   constructor(private productService: ProductService) { }
 
@@ -17,12 +17,11 @@ export class ProductThumbnailComponent implements OnInit {
   }
 
 
-  addToCart(){
-    console.log("clicked! " + this.product.id)
-    this.productService.addProductToCart(this.product.id).subscribe( () => {
+  addToCart() {
+    this.productService.addToCart(this.product.id).subscribe( () => {
       // console.log(data)
-      this.addedToCart = true
-    })
+      this.addedToCart = true;
+    });
   }
 
 }

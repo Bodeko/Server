@@ -14,6 +14,8 @@ import { appRoute } from 'src/routes';
 import { AuthGuard } from './auth.guard';
 import { ErrorComponent } from './error/error/error.component';
 import { AddressModule } from './address/address.module';
+import { AuthService } from './services/auth.service';
+import { UserService } from './services/user.service';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,9 @@ import { AddressModule } from './address/address.module';
   ],
   providers: [
     ApiService,
-    AuthGuard
+    AuthGuard,
+    AuthService,
+    UserService
   ],
   bootstrap: [AppComponent]
 })

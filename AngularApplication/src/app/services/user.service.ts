@@ -10,17 +10,11 @@ export class UserService{
 
     }
 
-    login(data){
-        return this.api.post<ILoggedUser>('/login',data, 'login')
-    }
 
     register(data){
         return this.api.post<ILoggedUser>('/register',data, 'resgiter')
     }
 
-    logout(){
-        return this.api.post<ILoggedUser>('/logout', {}, 'logout')
-    }
 
     getAddress(){
         return this.api.get<IAddress[]>('/address', 'getAddress')

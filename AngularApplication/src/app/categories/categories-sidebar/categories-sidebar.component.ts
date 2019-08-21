@@ -8,17 +8,19 @@ import { CategoriesService } from '../../services/categories.service';
   styleUrls: ['./categories-sidebar.component.css']
 })
 export class CategoriesSidebarComponent implements OnInit {
-  categories: ICategories[]
-  @Output() getSelectedCategoryId = new EventEmitter()
-  constructor(private categoryService: CategoriesService){ }
-  ngOnInit(){
-      this.categoryService.getCategories().subscribe(data => {
-          this.categories = data
-      })
+  categories: ICategories[];
+  @Output() getCategoryId = new EventEmitter();
+
+  constructor(private categoryService: CategoriesService) { }
+
+  ngOnInit() {
+      this.categoryService.getAll().subscribe(data => {
+          this.categories = data;
+      });
   }
 
-  sendCategoryId(id){
-    this.getSelectedCategoryId.emit(id)
+  getCategory(id) {
+    this.getCategoryId.emit(id);
   }
 
 }

@@ -10,21 +10,18 @@ export class OrderService{
   constructor(private api: ApiService) { }
 
 
-  getAllOrders(){
+  getAll(){
     return this.api.get<IOrder[]>('/orders', 'getAllOrders');
   }
 
-  getOrderDetailsById(id: number) {
-    return this.api.get<IOrderDetails>('/orders/' + id, 'getOrderDetailsById');
+  getDetailsById(order_id: number) {
+    return this.api.get<IOrderDetails>('/orders/' + order_id, 'getOrderDetailsById');
   }
 
   placeOrder(address_id) {
     return this.api.post<number>('/orders', {'address_id': address_id}, 'placeOrder');
   }
 
-  getProductById(id) {
-    return this.api.get<IProduct>('/products/' + id, 'getProductsById');
-  }
 
   buyNow(data){
     return this.api.post<number>('/orders/buy-now', data, 'buyNow');

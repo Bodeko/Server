@@ -8,7 +8,7 @@ import { IAddress } from 'src/app/models/address';
 })
 export class AddressListComponent implements OnInit {
   @Input() address: IAddress;
-  @Output() sendSelectedAddressToAddress = new EventEmitter;
+  @Output() getSelectedAddress = new EventEmitter;
   constructor() {
   }
 
@@ -16,8 +16,8 @@ export class AddressListComponent implements OnInit {
 
   }
 
-  setAddressToCart(){
-    this.sendSelectedAddressToAddress.emit(this.address);
+  setToCart(){
+    this.getSelectedAddress.emit(this.address);
   }
 
 }
